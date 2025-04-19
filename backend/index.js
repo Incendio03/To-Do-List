@@ -1,11 +1,14 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors'; 
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import loginRoute from './routes/userLoginRoute.js'
 
 dotenv.config();
 const app = express();
+
+app.use(cors());
 
 // Middleware
 app.use(express.json());
