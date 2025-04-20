@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import loginRoute from './routes/userLoginRoute.js'
+import signupRoute from './routes/userRegistrationRoute.js'
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/login", loginRoute);
+app.use("/signup", signupRoute);
 
 
 
