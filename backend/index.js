@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import dbConnection from './config/dbConfig.js'
 import cors from 'cors'; 
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -8,35 +8,29 @@ import signupRoute from './routes/userRegistrationRoute.js'
 
 dotenv.config();
 const app = express();
-
-app.use(cors());
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 // Routes
 app.use("/login", loginRoute);
 app.use("/signup", signupRoute);
 
 
+//Connect to database before starting server
+const startServer = async () => {
+  try{
+    await dbConnection();
 
+    app.listen(PORT, () => {
+      console.log(`Server running on port http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error(`Failed to start server: ${error.message}`);
+  }
+};
 
-
-
-
-
-
-const PORT = process.env.PORT;
-const MONGO_URI = process.env.MONGO_URI;
-
-mongoose.connect(MONGO_URI)
-.then(() => {
-  console.log("Connected to database!");
-  app.listen(PORT, () => {
-    console.log(`Server running on port http://localhost:${PORT}`);
-  });
-})
-.catch((error) => {
-  console.log("Failed connecting to database!", error.message);
-})
+startServer();
