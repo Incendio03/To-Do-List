@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { registerUser } from "../../services/authService";
+import '../../styles/authentication/signup.css'
 
 export function SignupPage() {
     const [username, setUsername] = useState('');
@@ -17,15 +18,31 @@ export function SignupPage() {
     return (
         <div>
 
-            <input placeholder="Username"
-                   value={username}
-                   onChange={(e) => setUsername(e.target.value)} />
+            <div className="signupPage">
 
-            <input placeholder="Password"
-                   value={password}
-                   onChange={(e) => setPassword(e.target.value)} />
+                <div className="signupContainer">
+                    <div className="inputContainer">
+                        <input
+                            className="signupInputs" 
+                            placeholder="Enter Username"    
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
 
-            <button onClick={onSignup}>Sign Up</button>
+                        <input
+                            className="signupInputs"  
+                            placeholder="Enter Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+
+                    <button className="signupBtn" onClick={onSignup}>Signup</button>
+
+                    <p className="login">Already have an account? <a href="/login">Login here</a></p>
+                </div>
+
+            </div>
 
         </div>
     );
