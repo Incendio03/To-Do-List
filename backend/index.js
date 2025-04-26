@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import loginRoute from './routes/userLoginRoute.js'
 import signupRoute from './routes/userRegistrationRoute.js'
+import userRoute from './routes/userRoute.js';
 
 dotenv.config();
 const app = express();
@@ -18,7 +19,7 @@ app.use(cors());
 // Routes
 app.use("/login", loginRoute);
 app.use("/signup", signupRoute);
-
+app.use("/users", userRoute);
 
 //Connect to database before starting server
 const startServer = async () => {

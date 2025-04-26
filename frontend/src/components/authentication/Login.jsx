@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/authService";
 import '../../styles/authentication/login.css';
 
 export function LoginPage() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     async function onLogin() {
         try {
-            const response = await loginUser(username, password);
-            alert(response.message || "Login successful!");
+            await loginUser(username, password);
+            navigate('/dashboard');
         } catch (error){
             alert(error.message);
         }
