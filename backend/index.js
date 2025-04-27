@@ -1,11 +1,12 @@
 import express from 'express';
-import dbConnection from './config/dbConfig.js'
+import dbConnection from './config/dbConfig.js';
 import cors from 'cors'; 
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import loginRoute from './routes/userLoginRoute.js'
-import signupRoute from './routes/userRegistrationRoute.js'
+import loginRoute from './routes/userLoginRoute.js';
+import signupRoute from './routes/userRegistrationRoute.js';
 import userRoute from './routes/userRoute.js';
+import listRoute from './routes/listRoute.js';
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(cors());
 app.use("/login", loginRoute);
 app.use("/signup", signupRoute);
 app.use("/users", userRoute);
+app.use('/lists', listRoute);
 
 //Connect to database before starting server
 const startServer = async () => {
