@@ -2,15 +2,20 @@ import { useState, useEffect } from "react";
 import { getUserByUsername } from '../../services/userService.js';
 import { getCurrentUser } from "../../services/authService.js";
 import { createList, getUserLists } from "../../services/listService.js";
+import Modal from 'react-modal';
 import '../../styles/dashboard/home.css';
 
 export function HomePage() {
+
+    Modal.setAppElement('#root')
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [lists, setLists] = useState([]);
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     // If component is already mounted, this will be used
     useEffect(() => {
@@ -41,11 +46,27 @@ export function HomePage() {
     if (loading) return <div>Loading...</div>
     if (error) return <div>Error: {error}</div>
 
-    async function createNewList() {
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+    async function onSave() {
         try {
-            await createList(title, description);
-        } catch (error) {
+            await createList(title, description)
             
+            setTitle('');
+            setDescription('');
+
+            closeModal()
+
+            const updatedListsData = await getUserLists();
+            setLists(updatedListsData.data || []);
+        } catch (error) {
+            alert(error.message);
         }
     }
 
@@ -56,7 +77,7 @@ export function HomePage() {
 
             <input className="searchInput" placeholder="Search List"></input>
 
-            <button className="createBtn" onClick={createNewList}>Create List</button>
+            <button className="createBtn" onClick={openModal}>Create List</button>
 
             <div className="divider">LISTS</div>
 
@@ -73,7 +94,34 @@ export function HomePage() {
                     </ul>
                 </div>
             </div>
-            
+
+            <Modal
+                isOpen={modalIsOpen}
+                className="modal-content"
+                overlayClassName="modal-overlay"
+            >
+                
+                <h2 className="modal-header">Create a New List</h2>
+                
+                <form className="modal-form">
+                    <label>Title</label>
+                    <input
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+
+                    <label>Description</label>
+                    <input                        
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    /> 
+                </form>
+
+                <div className="modal-buttons">
+                    <button className="modal-close-btn" onClick={closeModal}>Close</button>
+                    <button className="modal-save-btn" onClick={onSave}>Save</button>
+                </div>
+            </Modal>
         </div>
     );
 }
