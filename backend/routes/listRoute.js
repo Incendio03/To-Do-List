@@ -1,9 +1,10 @@
 import express from 'express';
-import { createList, getUserLists } from '../controllers/listController.js';
+import { createList, getUserLists, editList } from '../controllers/listController.js';
 
 const router = express.Router();
 
 router.post('/', createList)
-router.get('/:userId', getUserLists)
+router.put('/:id', editList)
+router.get('/user/:userId', getUserLists)
 
 export default router;

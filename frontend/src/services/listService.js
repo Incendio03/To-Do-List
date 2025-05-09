@@ -34,7 +34,7 @@ export const getUserLists = async () => {
             throw new Error("You must be logged in to view lists");
         }
 
-        const response = await apiClient.get(`/lists/${currentUser.id}`);
+        const response = await apiClient.get(`/lists/user/${currentUser.id}`);
         return response.data;
     } catch (error) {
         const errorMessage = error.response?.data?.message || 'Failed to fetch lists';
