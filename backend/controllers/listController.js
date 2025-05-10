@@ -36,13 +36,13 @@ const editList = async (req, res) => {
 
         //Checks if user owns the list
         if(!existingList){
-            return res.status(403).json({
+            return res.status(404).json({
                 success: false,
                 message: "List not found"
             });
         }
 
-        //Checs if user owns this list
+        //Checks if user owns this list
         if(existingList.user.toString() !== userId) {
             return res.status(403).json({
                 success: false,
@@ -59,7 +59,7 @@ const editList = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            date: updatedList
+            data: updatedList
         })
 
     } catch (error) {
