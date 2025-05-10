@@ -42,3 +42,13 @@ As a 4th-year Computer Science student, I applied the knowledge and skills I gai
 - **Node.js** — Server runtime
 - **JWT (JSON Web Tokens)** — For authentication
 - **Axios** — For API calls
+
+## Project Preview
+![Screenshot 2025-05-11 024721](https://github.com/user-attachments/assets/92e5ffb0-1f79-48f9-ba96-fd77ca030836)
+
+![Screenshot 2025-05-11 024912](https://github.com/user-attachments/assets/e63f6836-5d9c-4dfa-ac0b-e3b643fab51b)
+
+![Screenshot 2025-05-11 024930](https://github.com/user-attachments/assets/8b59a28f-299f-4f3e-93c1-203775a806de)
+
+
+
