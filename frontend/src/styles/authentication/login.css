@@ -1,94 +1,175 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden; /* Prevent scrollbars if content slightly overflows */
+}
+
 .loginPage {
     height: 100vh;
     width: 100vw;
-    background-color: white;
+    background-color: #f8f9fa;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    /* Removed justify-content and align-items to allow two distinct columns */
+    box-sizing: border-box;
 }
 
 .introContainer {
-    padding: 25px;
-    margin: 10px;
-    flex: 1;
-    max-width: 60%; 
+    display: flex; /* Enable flex for centering content within */
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: flex-start; /* Align text to the start */
+    flex-basis: 55%; /* Give it more space */
+    padding: 40px 60px; /* Generous padding */
+    background-color: #e9ecef; /* Slightly different background for visual separation */
+    color: #343a40;
+    box-sizing: border-box;
+}
+
+.introContainer h1 {
+    font-size: 48px; /* Larger heading */
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #212529;
+}
+
+.introContainer p {
+    font-size: 18px; /* Larger paragraph text */
+    line-height: 1.7;
+    max-width: 500px; /* Limit line length for readability */
 }
 
 .loginContainer {
-    height: 250px;
-    width: 250px;
-    background-color: rgb(153, 150, 150);
+    background-color: white;
     display: flex;
     flex-direction: column;
-    padding: 25px;
-    margin-right: 50px;
-    border-radius: 7px;
-    justify-content: space-between;
+    justify-content: center; /* Center form elements vertically */
+    padding: 40px 50px;
+    flex-basis: 45%; /* Remaining space */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.08); /* Shadow on the left side */
+    width: 100%;
+    max-width: none; /* Remove max-width as it's controlled by flex-basis */
+    box-sizing: border-box;
+}
+
+.loginHeader {
+    text-align: center;
+    font-size: 28px; /* Slightly larger header */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px; /* More space below header */
 }
 
 .inputContainer {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin: 0;
-    align-items: center;
+    gap: 20px; /* Slightly more gap */
+    margin-bottom: 25px;
     width: 100%;
 }
 
-
 .loginInputs {
-    padding: 10px;
-    border-radius: 4px;
-    width: 90%;
+    padding: 14px 18px; /* Even more padding for a better feel */
+    border-radius: 6px;
+    border: 1px solid #ced4da;
     box-sizing: border-box;
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.loginInputs:focus {
+    border-color: #333;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(51, 51, 51, 0.25);
 }
 
 .loginBtn {
-    padding: 10px;
-    background-color: black;
+    padding: 14px; /* Match input padding */
+    background-color: #212529;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    font-weight: bold;
-}
-
-.forgotPassword {
-    color: black;
-    text-decoration: none;
-    font-size: 10px;
     font-weight: 500;
-    margin-bottom: 15px;
-    align-self: flex-end;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    margin-right: 5%;      
-    cursor: pointer;
-}
-
-.forgotPassword:hover {
-    text-decoration: underline;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+    width: 100%;
 }
 
 .loginBtn:hover {
-    background-color: rgb(30, 30, 30);
+    background-color: #343a40;
+}
+
+.forgotPassword {
+    color: #495057;
+    text-decoration: none;
+    font-size: 14px; /* Adjusted size */
+    font-weight: 400;
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-bottom: 25px; /* More space below */
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.forgotPassword:hover {
+    color: #212529;
+    text-decoration: underline;
 }
 
 .register {
-    margin-top: auto;  
-    font-size: 10px;
+    font-size: 14px;
     text-align: center;
-    color: #333;
-    margin-bottom: 0;
+    color: #495057;
+    margin-top: 20px; /* More space from button */
 }
 
 .register a {
-    color: black;
+    color: #212529;
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.2s ease;
 }
 
 .register a:hover {
+    color: #007bff;
     text-decoration: underline;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .loginPage {
+        flex-direction: column; /* Stack them on smaller screens */
+        height: auto; /* Allow content to determine height */
+        min-height: 100vh; /* Ensure it still takes full viewport height */
+    }
+
+    .introContainer {
+        flex-basis: auto; /* Reset basis */
+        padding: 30px 20px; /* Adjust padding */
+        text-align: center; /* Center text */
+        align-items: center; /* Center content horizontally */
+    }
+
+    .introContainer h1 {
+        font-size: 36px; /* Adjust heading size */
+    }
+
+    .introContainer p {
+        font-size: 16px; /* Adjust paragraph size */
+        max-width: 90%;
+    }
+
+    .loginContainer {
+        flex-basis: auto; /* Reset basis */
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.08); /* Shadow on top */
+        padding: 30px 25px; /* Adjust padding */
+    }
+
+    .loginHeader {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
 }
